@@ -1,6 +1,6 @@
 # Audio Project
-Team Members: Shana Chao, Seohyun Ahn
-Term: Yonsei Fall 2025
+Team Members: Shana Chao, Seohyun Ahn  
+Term: Yonsei Fall 2025  
 Course: IIE2102 - Industrial Data Management
 
 ## Project Purpose
