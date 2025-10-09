@@ -1,1 +1,8 @@
+# ignore virtual environment
 venv/
+
+# ignore datasets
+data/
+
+# macOS system files
+.DS_Store
