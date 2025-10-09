@@ -24,3 +24,38 @@ tbd
 3. Train neural net/classifier on MFCC features
 4. Evaluate accuracy
 
+## Dataset
+
+This project uses the following open-source speech datasets:
+
+### 1. EmoV-DB (SLR115)
+
+* **Description:** Emotional English speech database for synthesis (male and female speakers)
+* **Link:** [https://github.com/numediart/EmoV-DB](https://github.com/numediart/EmoV-DB)
+* **Citation (BibTeX):**
+
+```
+@article{adigwe2018emotional,
+  title={The Emotional Voices Database: Towards Controlling the Emotion Dimension in Voice Generation Systems},
+  author={Adigwe, Adaeze and Tits, No{\'e} and Haddad, Kevin El and Ostadabbas, Sarah and Dutoit, Thierry},
+  journal={arXiv preprint arXiv:1806.09514},
+  year={2018}
+}
+```
+
+### 2. Deeply Korean Read Speech Corpus (SLR97)
+
+* **Description:** Korean read speech recordings with text and vocal sentiment labels, recorded in multiple environments and devices
+* **Link:** [https://github.com/deeplyinc/Korean-Read-Speech-Corpus](https://github.com/deeplyinc/Korean-Read-Speech-Corpus)
+* **Citation (BibTeX):**
+
+```
+@misc{deeply_corpus_kor,
+  title={{Deeply Korean Read Speech Corpus}},
+  author={Deeply Inc.},
+  year={2021},
+  url={https://github.com/deeplyinc/Korean-Read-Speech-Corpus}
+}
+```
+
+> **License Notice:** Please refer to dataset licenses for usage restrictions and attribution requirements.
