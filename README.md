@@ -8,7 +8,7 @@ The audio project serves as the capstone project for Yonsei's Industrial Data Ma
 
 ## Proposed Technologies
 ### Language Classification
-1. torchaudio Python library: loading audio data
+1. librosa Python library: loading audio data
 2. speech-to-text model: specific model to be decided
 
 ### Age Classification
