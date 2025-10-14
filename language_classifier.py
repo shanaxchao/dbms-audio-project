@@ -21,7 +21,7 @@ for file in audio_files:
     y.append(label)
     
     # load audio
-    y_audio, sr = librosa.load(file, sr=None)
+    y_audio, sr = librosa.load(file, sr=16000, mono=True)
     
     # extract features, e.g., MFCCs and average over time
     mfccs = librosa.feature.mfcc(y=y_audio, sr=sr, n_mfcc=13)
