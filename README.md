@@ -20,8 +20,8 @@ tbd
 ## Project Extension Proposal
 ### Training Model Steps
 1. Import datasets: sorted by language, age, sex/gender
-2. Preprocess data: convert from MP3 to waveforms via torchaudio/librosa, transform audio into Mel-frequency cepstral coefficients (MFCCs)
-3. Train neural net/classifier on MFCC features
+2. Preprocess data: convert from .wav files to waveforms via librosa, transform audio into Mel-frequency cepstral coefficients (MFCCs)
+3. Train neural net/classifier on MFCC features, Random Forest
 4. Evaluate accuracy
 
 ## Dataset
