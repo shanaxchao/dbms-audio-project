@@ -39,6 +39,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 
 # train random forest
 model = RandomForestClassifier(n_estimators=100, random_state=40)
+
 model.fit(X_train, y_train)
 
 # predict labels for test set
