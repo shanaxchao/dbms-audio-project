@@ -5,6 +5,10 @@ import numpy as np
 import pandas as pd
 import joblib
 
+import xgboost as xgb
+from xgboost import XGBClassifier
+from sklearn.preprocessing import LabelEncoder
+
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
@@ -32,13 +36,23 @@ for file in audio_files:
 X = np.array(X)
 y = np.array(y)
 
+le = LabelEncoder()
+y = le.fit_transform(y)
+
 # split into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42, stratify=y
 )
 
 # train random forest
-model = RandomForestClassifier(n_estimators=100, random_state=40)
+#model = RandomForestClassifier(n_estimators=100, random_state=40)
+model = xgb.XGBClassifier(
+    n_estimators = 300, 
+    learning_rate = 0.3, 
+    max_depth = 6, 
+    subsample = 1,
+    eval_metric = 'logloss'
+)
 
 model.fit(X_train, y_train)
 
@@ -49,11 +63,11 @@ y_pred = model.predict(X_test)
 print("Accuracy:", accuracy_score(y_test, y_pred))
 
 # detailed report
-print(classification_report(y_test, y_pred))
+print(classification_report(y_test, y_pred, target_names = le.classes_))
 
 # confusion matrix
 print(confusion_matrix(y_test, y_pred))
 
 # save model
 Path("models").mkdir(exist_ok=True)
-joblib.dump(model, "models/language_classifier.pkl")
+joblib.dump({"model":model, "label_encoder":le}, "models/language_classifier.pkl")
