@@ -30,8 +30,11 @@ for file in audio_files:
     # extract features, e.g., MFCCs and average over time
     mfccs = librosa.feature.mfcc(y=y_audio, sr=sr, n_mfcc=13)
     mfccs_mean = np.mean(mfccs, axis=1)  # shape (13,)
-    
-    X.append(mfccs_mean)
+    mfccs_std = np.std(mfccs, axis = 1)
+
+    features = np.concatenate((mfccs_mean, mfccs_std))
+
+    X.append(features)
 
 X = np.array(X)
 y = np.array(y)
@@ -40,9 +43,10 @@ le = LabelEncoder()
 y = le.fit_transform(y)
 
 # split into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42, stratify=y
-)
+for seed in [1, 2, 3, 4, 5]:
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size = 0.2, random_state = seed, stratify = y
+    )
 
 # train random forest
 #model = RandomForestClassifier(n_estimators=100, random_state=40)
