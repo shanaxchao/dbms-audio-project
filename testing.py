@@ -6,17 +6,19 @@ import librosa
 import numpy as np
 import joblib
 
-bundle = joblib.load("models/language_classifier.pkl")
-model = bundle["model"]
-le = bundle["label_encoder"]
+model = joblib.load("models/language_classifier.pkl")
 
 file_path = "./data/raw_3.wav"
 y_audio, sr = librosa.load(file_path, sr=16000, mono=True)
 
 mfccs = librosa.feature.mfcc(y=y_audio, sr=sr, n_mfcc = 13)
 mfccs_mean = np.mean(mfccs, axis=1)
+mfccs_std = np.std(mfccs, axis=1)
+features = np.concatenate((mfccs_mean, mfccs_std))
 
-X_new = mfccs_mean.reshape(1, -1)
+X_new = features.reshape(1, -1)
 
-predicted_label = model.predict(X_new)
-print("predicted language : ", le.inverse_transform(predicted_label))
+predicted_label = model.predict(X_new)[0]
+label = {0 : "english", 1 : "korean"}
+
+print("predicted language:", label.get(predicted_label, predicted_label))

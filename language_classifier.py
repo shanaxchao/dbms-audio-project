@@ -91,4 +91,4 @@ print(confusion_matrix(y_test, y_pred))
 
 # save model
 Path("models").mkdir(exist_ok=True)
-joblib.dump(model, "models/language_classification.pkl")
+joblib.dump(model, "models/language_classifier.pkl")
