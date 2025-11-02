@@ -19,6 +19,9 @@ features = np.concatenate((mfccs_mean, mfccs_std))
 X_new = features.reshape(1, -1)
 
 predicted_label = model.predict(X_new)[0]
+probs = model.predict_proba(X_new)[0] 
+
 label = {0 : "english", 1 : "korean"}
 
 print("predicted language:", label.get(predicted_label, predicted_label))
+print(f"confidence: {probs[predicted_label]:.4f}")
