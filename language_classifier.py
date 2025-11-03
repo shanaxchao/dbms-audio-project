@@ -43,7 +43,7 @@ korean_files = glob(f"{korean_dir}/*.wav")
 kor_train = [f for f in korean_files if Path(f).stem.lower().startswith("a_")]
 kor_test = [f for f in korean_files if Path(f).stem.lower().startswith("b_")]
 
-print(len(eng_test), len(kor_test))
+#print(len(eng_test), len(kor_test))
 
 #data split
 X_train, y_train, X_test, y_test = [], [], [], []
