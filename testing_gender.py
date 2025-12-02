@@ -71,7 +71,6 @@ def predict_gender(file_path):
     X_new_scaled = scaler.transform(X_new)
 
     # (4) 예측
-    # === 예측 ===
     proba_male = model.predict_proba(X_new_scaled)[0, 1]  # male 확률
 
     threshold = 0.7 # ★ 여기에 threshold 설정 (0.55~0.7 사이에서 튜닝 가능)
