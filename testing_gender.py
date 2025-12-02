@@ -7,7 +7,7 @@ import joblib
 from pathlib import Path
 
 # ===== 1) 모델 / 스케일러 / feature_cols 로드 =====
-model = joblib.load("models/gender_classifier.pkl")
+model = joblib.load("models/gender_xgb_model.pkl")
 scaler = joblib.load("models/gender_scaler.pkl")
 feature_cols = joblib.load("models/gender_feature_cols.pkl")
 
@@ -71,17 +71,20 @@ def predict_gender(file_path):
     X_new_scaled = scaler.transform(X_new)
 
     # (4) 예측
-    predicted_label = int(model.predict(X_new_scaled)[0])
-    probs = model.predict_proba(X_new_scaled)[0]
+    # === 예측 ===
+    proba_male = model.predict_proba(X_new_scaled)[0, 1]  # male 확률
 
-    label_map = {0: "female", 1: "male"}
+    threshold = 0.7 # ★ 여기에 threshold 설정 (0.55~0.7 사이에서 튜닝 가능)
+    pred_label = 1 if proba_male >= threshold else 0
 
-    print("predicted gender:", label_map.get(predicted_label, predicted_label))
-    print(f"confidence: {probs[predicted_label]:.4f}")
+    gender_str = "male" if pred_label == 1 else "female"
 
-    return predicted_label, probs
+    print(f"Male probability: {proba_male:.3f}, threshold={threshold}")
+    print(f"Predicted gender: {gender_str}")
+    return pred_label, proba_male
 
 
 if __name__ == "__main__":
-    file_path = "./data/raw_3.wav"  # 네가 녹음한 파일 경로
+    file_path = "./data/raw_5.wav"  # 네가 녹음한 파일 경로
     predict_gender(file_path)
+
