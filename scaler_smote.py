@@ -83,6 +83,6 @@ joblib.dump(xgb, MODEL_DIR / "smote_xgb.pkl")
 joblib.dump(std_scaler, MODEL_DIR / "smote_scaler.pkl")
 joblib.dump(feature_cols, MODEL_DIR / "feature_cols.pkl")
 
-X_val.to_csv("data/X_val.csv", index = False)
-y_val.to_csv("data/y_val.csv", index = False)
+X_val.to_csv("X_val.csv", index = False)
+y_val.to_csv("y_val.csv", index = False)
 
