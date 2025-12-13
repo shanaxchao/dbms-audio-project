@@ -2,10 +2,8 @@ import pandas as pd
 
 df = pd.read_csv("voice_df.csv")
 
-# gender_label이 0/1 형태라고 가정
 y = df["gender_label"]
 
-# 숫자형 feature만 선택
 numeric_df = df.select_dtypes(include=["float", "int"]).drop(columns=["gender_label"])
 corr = numeric_df.apply(lambda col: col.corr(y))
 corr = corr.sort_values(ascending=False)

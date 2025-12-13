@@ -1,11 +1,7 @@
-# ignore virtual environment
+# virtual environment
 venv/
 
-# ignore datasets
-data/
-
-# macOS system files
+# OS junk
 .DS_Store
-
-# ignore model files
-models/
+__pycache__/
+*.pyc

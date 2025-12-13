@@ -9,7 +9,7 @@ from sklearn.metrics import accuracy_score, classification_report
 from xgboost import XGBClassifier
 import joblib
 
-# ===== 1. 경로 설정 =====
+
 
 # ===== 1) 경로 설정 (VS Code relative path) =====
 BASE_DIR = Path(__file__).resolve().parent

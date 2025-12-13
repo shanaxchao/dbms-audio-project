@@ -28,15 +28,6 @@ GENDER_MAP = {
     "male_masculine": 1,
 }
 
-AGE_MAP = {
-    "teens": 0,
-    "twenties": 1,
-    "thirties": 2,
-    "fourties": 3,
-    "fifties": 4,
-}
-
-
 # ===== 3) feature 추출 =====
 def extract_features(path, sr=22050):
     y, sr = librosa.load(path, sr=sr)
@@ -75,7 +66,6 @@ def load_meta(meta_path: Path) -> pd.DataFrame:
 
     # 문자열 컬럼 공백 제거
     df["path"] = df["path"].astype(str).str.strip()
-    df["age"] = df["age"].astype(str).str.strip()
     df["gender"] = df["gender"].astype(str).str.strip()
 
     return df
@@ -108,11 +98,8 @@ def main():
         # meta 기반 라벨 추가
         feats.update({
             "filename": filename,
-            "age": age_str,
-            "gender": gender_str,
-            "age_label": AGE_MAP.get(age_str, -1),
             "gender_label": GENDER_MAP.get(gender_str, -1),
-            "language": "ko",
+      
         })
 
         rows.append(feats)
@@ -136,8 +123,6 @@ def main():
             print(f"[WARN] 성별 미지정 화자, 스킵: {filename} (speaker={speaker})")
             continue
 
-        age_str = "thirties"  # 영어는 전부 30대
-
         try:
             feats = extract_features(str(audio_path))
         except Exception as e:
@@ -146,11 +131,7 @@ def main():
 
         feats.update({
             "filename": filename,
-            "age": age_str,
-            "gender": gender_str,  # ← 한국어와 동일한 문자열
-            "age_label": AGE_MAP.get(age_str, -1),
             "gender_label": GENDER_MAP.get(gender_str, -1),
-            "language": "en",
         })
 
         rows.append(feats)
@@ -165,6 +146,7 @@ def main():
         "raw_3.wav": ("female_feminine", 0),
         "raw_4.wav": ("female_feminine", 0),
         "raw_5.wav": ("male_masculine", 1),
+        "raw_6.wav": ("female_feminine", 0)
     }
 
     for fname, (gender_str, gender_label) in raw_gender_map.items():
@@ -182,11 +164,7 @@ def main():
 
         feats.update({
             "filename": fname,
-            "age": "thirties",                    # raw는 나이 정보 없으므로 임의로 통일
-            "gender": gender_str,
-            "age_label": AGE_MAP.get("thirties", 2),
             "gender_label": gender_label,
-            "language": "raw",                    # raw 표시
         })
 
         rows.append(feats)
